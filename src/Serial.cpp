@@ -112,7 +112,7 @@ namespace Serial_ns
 //--------------------------------------------------------
 /**
  *	Method      : Serial::Serial()
- *	Description : Constructors for a Tango device
+ * Description:  Constructors for a Tango device
  *                implementing the classSerial
  */
 //--------------------------------------------------------
@@ -145,11 +145,16 @@ Serial::Serial(Tango::DeviceClass *cl, const char *s, const char *d)
 
 	/*----- PROTECTED REGION END -----*/	//	Serial::constructor_3
 }
+//--------------------------------------------------------
+Serial::~Serial()
+{
+	delete_device();
+}
 
 //--------------------------------------------------------
 /**
  *	Method      : Serial::delete_device()
- *	Description : will be called at device destruction or at init command
+ * Description:  will be called at device destruction or at init command
  */
 //--------------------------------------------------------
 void Serial::delete_device()
@@ -167,7 +172,7 @@ void Serial::delete_device()
 //--------------------------------------------------------
 /**
  *	Method      : Serial::init_device()
- *	Description : will be called at device initialization.
+ * Description:  will be called at device initialization.
  */
 //--------------------------------------------------------
 void Serial::init_device()
@@ -182,11 +187,11 @@ void Serial::init_device()
 	INFO_STREAM << "Serial::Serial() create device " << device_name << std::endl;
 
 	/*----- PROTECTED REGION END -----*/	//	Serial::init_device_before
-	
+
 
 	//	Get the device properties from database
 	get_device_property();
-	
+
 	/*----- PROTECTED REGION ID(Serial::init_device) ENABLED START -----*/
    if (simulated) {
         std::cout << "=========== Device " << device_name << " is simulated ==========" << std::endl;
@@ -354,7 +359,7 @@ void Serial::init_device()
 //--------------------------------------------------------
 /**
  *	Method      : Serial::get_device_property()
- *	Description : Read database to initialize property data members.
+ * Description:  Read database to initialize property data members.
  */
 //--------------------------------------------------------
 void Serial::get_device_property()
@@ -383,7 +388,7 @@ void Serial::get_device_property()
 		//	Call database and extract values
 		if (Tango::Util::instance()->_UseDb==true)
 			get_db_device()->get_property(dev_prop);
-	
+
 		//	get instance on SerialClass to get class property
 		Tango::DbDatum	def_prop, cl_prop;
 		SerialClass	*ds_class =
@@ -500,7 +505,7 @@ void Serial::get_device_property()
 //--------------------------------------------------------
 /**
  *	Method      : Serial::always_executed_hook()
- *	Description : method always executed before any command is executed
+ * Description:  method always executed before any command is executed
  */
 //--------------------------------------------------------
 void Serial::always_executed_hook()
@@ -520,7 +525,7 @@ void Serial::always_executed_hook()
 //--------------------------------------------------------
 /**
  *	Method      : Serial::read_attr_hardware()
- *	Description : Hardware acquisition for attributes
+ * Description:  Hardware acquisition for attributes
  */
 //--------------------------------------------------------
 void Serial::read_attr_hardware(TANGO_UNUSED(std::vector<long> &attr_list))
@@ -537,7 +542,7 @@ void Serial::read_attr_hardware(TANGO_UNUSED(std::vector<long> &attr_list))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::add_dynamic_attributes()
- *	Description : Create the dynamic attributes if any
+ * Description:  Create the dynamic attributes if any
  *                for specified device.
  */
 //--------------------------------------------------------
@@ -553,7 +558,7 @@ void Serial::add_dynamic_attributes()
 //--------------------------------------------------------
 /**
  *	Command DevSerWriteString related method
- *	Description: Write a string of characters to a serial line and return
+ * Description:  Write a string of characters to a serial line and return
  *               the number of characters written.
  *
  *	@param argin String to write
@@ -615,7 +620,7 @@ Tango::DevLong Serial::dev_ser_write_string(Tango::DevString argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerWriteChar related method
- *	Description: Write N characters to a seria line and return the
+ * Description:  Write N characters to a seria line and return the
  *               number of characters written.
  *
  *	@param argin Characters to write
@@ -699,7 +704,7 @@ Tango::DevLong Serial::dev_ser_write_char(const Tango::DevVarCharArray *argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerReadString related method
- *	Description: Win32 method :
+ * Description:  Win32 method :
  *               Read a string of characters, the type of read is specified in the
  *               input parameter SL_RAW SL_NCHAR SL_LINE
  *
@@ -764,7 +769,7 @@ Tango::DevString Serial::dev_ser_read_string(Tango::DevLong argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerReadChar related method
- *	Description: Win32 method :
+ * Description:  Win32 method :
  *               Read an array of characters, the type of read is specified in the
  *               input parameter, it can be SL_RAW SL_NCHAR SL_LINE
  *
@@ -898,7 +903,7 @@ Tango::DevVarCharArray *Serial::dev_ser_read_char(Tango::DevLong argin)
 //--------------------------------------------------------
 /**
  *	Command WriteRead related method
- *	Description: This method permit to send a request to a device throw the serial line and returns the
+ * Description:  This method permit to send a request to a device throw the serial line and returns the
  *               response of the device.
  *               The commands write and read don't return until they have not finished.
  *
@@ -964,7 +969,7 @@ Tango::DevString Serial::write_read(const Tango::DevVarLongStringArray *argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerGetNChar related method
- *	Description: Return the number of chars available in receiving buffer
+ * Description:  Return the number of chars available in receiving buffer
  *
  *	@returns number of char available in receiving buffer
  */
@@ -1011,7 +1016,7 @@ if (ioctl(this->serialdevice.serialin, FIONREAD, &argout) < 0)
 //--------------------------------------------------------
 /**
  *	Command DevSerReadNChar related method
- *	Description: Read a string of N characters from the serial line
+ * Description:  Read a string of N characters from the serial line
  *               If there are no characters to be read returns an empty string.
  *
  *	@param argin number of the caracters to read on the serial line
@@ -1033,7 +1038,7 @@ Tango::DevString Serial::dev_ser_read_nchar(Tango::DevLong argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerReadRaw related method
- *	Description: read a string from the serialline device in mode raw (no end
+ * Description:  read a string from the serialline device in mode raw (no end
  *               of string expected, just empty the entire serialline receiving buffer).
  *
  *	@returns pointer to the string read updated
@@ -1054,7 +1059,7 @@ Tango::DevString Serial::dev_ser_read_raw()
 //--------------------------------------------------------
 /**
  *	Command DevSerReadLine related method
- *	Description: read a string from the serialline device in mode line (up to
+ * Description:  read a string from the serialline device in mode line (up to
  *               and including the character specified by the NewLine property
  *
  *	@returns pointer to the string read updated
@@ -1075,7 +1080,7 @@ Tango::DevString Serial::dev_ser_read_line()
 //--------------------------------------------------------
 /**
  *	Command DevSerFlush related method
- *	Description: Win32 method :
+ * Description:  Win32 method :
  *               Flush serial line port according to argin passed.
  *
  *	@param argin flush to do 0=input 1=output 2=both
@@ -1134,7 +1139,7 @@ void Serial::dev_ser_flush(Tango::DevLong argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetParameter related method
- *	Description: Set serial line parameters
+ * Description:  Set serial line parameters
  *
  *	@param argin device parameters in pair
  */
@@ -1157,7 +1162,7 @@ void Serial::dev_ser_set_parameter(const Tango::DevVarLongArray *argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetTimeout related method
- *	Description: This command sets the new timeout (in ms).
+ * Description:  This command sets the new timeout (in ms).
  *
  *	@param argin Value of the timeout to set
  */
@@ -1198,7 +1203,7 @@ void Serial::dev_ser_set_timeout(Tango::DevShort argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetParity related method
- *	Description: Sets the new parity of the serial line.
+ * Description:  Sets the new parity of the serial line.
  *               NONE 0
  *               ODD 1
  *               EVEN 3
@@ -1242,7 +1247,7 @@ void Serial::dev_ser_set_parity(Tango::DevShort argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetCharLength related method
- *	Description: Sets the new charlength.
+ * Description:  Sets the new charlength.
  *               0 = 8 bits
  *               1 = 7 bits
  *               2 = 6 bits
@@ -1288,7 +1293,7 @@ void Serial::dev_ser_set_char_length(Tango::DevShort argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetStopbit related method
- *	Description: Sets the new stop bit.
+ * Description:  Sets the new stop bit.
  *               0 = none
  *               1 = one stop
  *               2 = 1.5 stop bit
@@ -1333,7 +1338,7 @@ void Serial::dev_ser_set_stopbit(Tango::DevShort argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetBaudrate related method
- *	Description: Sets the new baudrateof the serial line ( up to 4 Mega).
+ * Description:  Sets the new baudrateof the serial line ( up to 4 Mega).
  *               Default is 9600.
  *
  *	@param argin The new baudrate to set
@@ -1376,7 +1381,7 @@ void Serial::dev_ser_set_baudrate(Tango::DevULong argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerSetNewline related method
- *	Description: The new ending character in hexa.
+ * Description:  The new ending character in hexa.
  *               Default is 0x13 (=CR
  *
  *	@param argin The new line character to set
@@ -1423,7 +1428,7 @@ void Serial::dev_ser_set_newline(Tango::DevShort argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerReadRetry related method
- *	Description: read a string from the serialline device in mode raw (no end
+ * Description:  read a string from the serialline device in mode raw (no end
  *               of string expected, just empty the entire serialline receiving buffer).
  *               If read successfull, read again "nretry" times.
  *
@@ -1446,7 +1451,7 @@ Tango::DevString Serial::dev_ser_read_retry(Tango::DevLong argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerReadNBinData related method
- *	Description: Read the specified number of char from the serial line.
+ * Description:  Read the specified number of char from the serial line.
  *               If the number of caracters is greater than caracters avaiable, this command returns
  *               all caracters avaiables.
  *               If there are no characters to be read returns an empty array.
@@ -1485,7 +1490,7 @@ Tango::DevVarCharArray *Serial::dev_ser_read_nbin_data(Tango::DevLong argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerWaitChar related method
- *	Description: Command blocks until a char is available or the timeout expired.
+ * Description:  Command blocks until a char is available or the timeout expired.
  *               If the timeout value is 0 then the command returns immediately 
  *               with the number of chars available if any or timeout error if no char available
  *
@@ -1522,7 +1527,7 @@ Tango::DevLong Serial::dev_ser_wait_char()
 //--------------------------------------------------------
 /**
  *	Command DevSerSetParameterCompat related method
- *	Description: Set serial line parameters.
+ * Description:  Set serial line parameters.
  *               The command is the same as DevSerSetParameters, but takes the parameters
  *               as a short array for compatibility with the old Taco interface.
  *
@@ -1559,7 +1564,7 @@ void Serial::dev_ser_set_parameter_compat(const Tango::DevVarShortArray *argin)
 //--------------------------------------------------------
 /**
  *	Command DevSerFlushCompat related method
- *	Description: Flush the serial line port according to argin passed.
+ * Description:  Flush the serial line port according to argin passed.
  *               The command is the same as DevSerFlush but takes the
  *               input parameter as short value for compatibility with the old Taco
  *               interface.
@@ -1584,7 +1589,7 @@ void Serial::dev_ser_flush_compat(Tango::DevShort argin)
 //--------------------------------------------------------
 /**
  *	Method      : Serial::add_dynamic_commands()
- *	Description : Create the dynamic commands if any
+ * Description:  Create the dynamic commands if any
  *                for specified device.
  */
 //--------------------------------------------------------

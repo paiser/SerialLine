@@ -120,10 +120,21 @@ unsigned long  baudrate;    /* baud rate */
 
 /*----- PROTECTED REGION END -----*/	//	Serial.h
 
+#ifdef TANGO_LOG
+	// cppTango after c934adea (Merge branch 'remove-cout-definition' into 'main', 2022-05-23)
+	// nothing to do
+#else
+	// cppTango 9.3-backports and older
+	#define TANGO_LOG       cout
+	#define TANGO_LOG_INFO  cout2
+	#define TANGO_LOG_DEBUG cout3
+#endif // TANGO_LOG
+
 /**
  *  Serial class description:
  *    C++ source for the SerialClass
  */
+
 
 namespace Serial_ns
 {
@@ -197,7 +208,7 @@ public:
 	/**
 	 * The device object destructor.
 	 */
-	~Serial() {delete_device();};
+	~Serial();
 
 
 //	Miscellaneous methods
@@ -225,7 +236,7 @@ public:
 	//--------------------------------------------------------
 	/*
 	 *	Method      : Serial::read_attr_hardware()
-	 *	Description : Hardware acquisition for attributes.
+	 * Description:  Hardware acquisition for attributes.
 	 */
 	//--------------------------------------------------------
 	virtual void read_attr_hardware(std::vector<long> &attr_list);
@@ -234,7 +245,7 @@ public:
 	//--------------------------------------------------------
 	/**
 	 *	Method      : Serial::add_dynamic_attributes()
-	 *	Description : Add dynamic attributes if any.
+	 * Description:  Add dynamic attributes if any.
 	 */
 	//--------------------------------------------------------
 	void add_dynamic_attributes();
@@ -246,7 +257,7 @@ public:
 public:
 	/**
 	 *	Command DevSerWriteString related method
-	 *	Description: Write a string of characters to a serial line and return
+	 * Description:  Write a string of characters to a serial line and return
 	 *               the number of characters written.
 	 *
 	 *	@param argin String to write
@@ -256,7 +267,7 @@ public:
 	virtual bool is_DevSerWriteString_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerWriteChar related method
-	 *	Description: Write N characters to a seria line and return the
+	 * Description:  Write N characters to a seria line and return the
 	 *               number of characters written.
 	 *
 	 *	@param argin Characters to write
@@ -266,7 +277,7 @@ public:
 	virtual bool is_DevSerWriteChar_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadString related method
-	 *	Description: Win32 method :
+	 * Description:  Win32 method :
 	 *               Read a string of characters, the type of read is specified in the
 	 *               input parameter SL_RAW SL_NCHAR SL_LINE
 	 *
@@ -277,7 +288,7 @@ public:
 	virtual bool is_DevSerReadString_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadChar related method
-	 *	Description: Win32 method :
+	 * Description:  Win32 method :
 	 *               Read an array of characters, the type of read is specified in the
 	 *               input parameter, it can be SL_RAW SL_NCHAR SL_LINE
 	 *
@@ -288,7 +299,7 @@ public:
 	virtual bool is_DevSerReadChar_allowed(const CORBA::Any &any);
 	/**
 	 *	Command WriteRead related method
-	 *	Description: This method permit to send a request to a device throw the serial line and returns the
+	 * Description:  This method permit to send a request to a device throw the serial line and returns the
 	 *               response of the device.
 	 *               The commands write and read don't return until they have not finished.
 	 *
@@ -299,7 +310,7 @@ public:
 	virtual bool is_WriteRead_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerGetNChar related method
-	 *	Description: Return the number of chars available in receiving buffer
+	 * Description:  Return the number of chars available in receiving buffer
 	 *
 	 *	@returns number of char available in receiving buffer
 	 */
@@ -307,7 +318,7 @@ public:
 	virtual bool is_DevSerGetNChar_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadNChar related method
-	 *	Description: Read a string of N characters from the serial line
+	 * Description:  Read a string of N characters from the serial line
 	 *               If there are no characters to be read returns an empty string.
 	 *
 	 *	@param argin number of the caracters to read on the serial line
@@ -317,7 +328,7 @@ public:
 	virtual bool is_DevSerReadNChar_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadRaw related method
-	 *	Description: read a string from the serialline device in mode raw (no end
+	 * Description:  read a string from the serialline device in mode raw (no end
 	 *               of string expected, just empty the entire serialline receiving buffer).
 	 *
 	 *	@returns pointer to the string read updated
@@ -326,7 +337,7 @@ public:
 	virtual bool is_DevSerReadRaw_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadLine related method
-	 *	Description: read a string from the serialline device in mode line (up to
+	 * Description:  read a string from the serialline device in mode line (up to
 	 *               and including the character specified by the NewLine property
 	 *
 	 *	@returns pointer to the string read updated
@@ -335,7 +346,7 @@ public:
 	virtual bool is_DevSerReadLine_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerFlush related method
-	 *	Description: Win32 method :
+	 * Description:  Win32 method :
 	 *               Flush serial line port according to argin passed.
 	 *
 	 *	@param argin flush to do 0=input 1=output 2=both
@@ -344,7 +355,7 @@ public:
 	virtual bool is_DevSerFlush_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetParameter related method
-	 *	Description: Set serial line parameters
+	 * Description:  Set serial line parameters
 	 *
 	 *	@param argin device parameters in pair
 	 */
@@ -352,7 +363,7 @@ public:
 	virtual bool is_DevSerSetParameter_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetTimeout related method
-	 *	Description: This command sets the new timeout (in ms).
+	 * Description:  This command sets the new timeout (in ms).
 	 *
 	 *	@param argin Value of the timeout to set
 	 */
@@ -360,7 +371,7 @@ public:
 	virtual bool is_DevSerSetTimeout_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetParity related method
-	 *	Description: Sets the new parity of the serial line.
+	 * Description:  Sets the new parity of the serial line.
 	 *               NONE 0
 	 *               ODD 1
 	 *               EVEN 3
@@ -371,7 +382,7 @@ public:
 	virtual bool is_DevSerSetParity_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetCharLength related method
-	 *	Description: Sets the new charlength.
+	 * Description:  Sets the new charlength.
 	 *               0 = 8 bits
 	 *               1 = 7 bits
 	 *               2 = 6 bits
@@ -383,7 +394,7 @@ public:
 	virtual bool is_DevSerSetCharLength_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetStopbit related method
-	 *	Description: Sets the new stop bit.
+	 * Description:  Sets the new stop bit.
 	 *               0 = none
 	 *               1 = one stop
 	 *               2 = 1.5 stop bit
@@ -394,7 +405,7 @@ public:
 	virtual bool is_DevSerSetStopbit_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetBaudrate related method
-	 *	Description: Sets the new baudrateof the serial line ( up to 4 Mega).
+	 * Description:  Sets the new baudrateof the serial line ( up to 4 Mega).
 	 *               Default is 9600.
 	 *
 	 *	@param argin The new baudrate to set
@@ -403,7 +414,7 @@ public:
 	virtual bool is_DevSerSetBaudrate_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetNewline related method
-	 *	Description: The new ending character in hexa.
+	 * Description:  The new ending character in hexa.
 	 *               Default is 0x13 (=CR
 	 *
 	 *	@param argin The new line character to set
@@ -412,7 +423,7 @@ public:
 	virtual bool is_DevSerSetNewline_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadRetry related method
-	 *	Description: read a string from the serialline device in mode raw (no end
+	 * Description:  read a string from the serialline device in mode raw (no end
 	 *               of string expected, just empty the entire serialline receiving buffer).
 	 *               If read successfull, read again "nretry" times.
 	 *
@@ -423,7 +434,7 @@ public:
 	virtual bool is_DevSerReadRetry_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerReadNBinData related method
-	 *	Description: Read the specified number of char from the serial line.
+	 * Description:  Read the specified number of char from the serial line.
 	 *               If the number of caracters is greater than caracters avaiable, this command returns
 	 *               all caracters avaiables.
 	 *               If there are no characters to be read returns an empty array.
@@ -435,7 +446,7 @@ public:
 	virtual bool is_DevSerReadNBinData_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerWaitChar related method
-	 *	Description: Command blocks until a char is available or the timeout expired.
+	 * Description:  Command blocks until a char is available or the timeout expired.
 	 *               If the timeout value is 0 then the command returns immediately 
 	 *               with the number of chars available if any or timeout error if no char available
 	 *
@@ -445,7 +456,7 @@ public:
 	virtual bool is_DevSerWaitChar_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerSetParameterCompat related method
-	 *	Description: Set serial line parameters.
+	 * Description:  Set serial line parameters.
 	 *               The command is the same as DevSerSetParameters, but takes the parameters
 	 *               as a short array for compatibility with the old Taco interface.
 	 *
@@ -455,7 +466,7 @@ public:
 	virtual bool is_DevSerSetParameterCompat_allowed(const CORBA::Any &any);
 	/**
 	 *	Command DevSerFlushCompat related method
-	 *	Description: Flush the serial line port according to argin passed.
+	 * Description:  Flush the serial line port according to argin passed.
 	 *               The command is the same as DevSerFlush but takes the
 	 *               input parameter as short value for compatibility with the old Taco
 	 *               interface.
@@ -469,7 +480,7 @@ public:
 	//--------------------------------------------------------
 	/**
 	 *	Method      : Serial::add_dynamic_commands()
-	 *	Description : Add dynamic commands if any.
+	 * Description:  Add dynamic commands if any.
 	 */
 	//--------------------------------------------------------
 	void add_dynamic_commands();

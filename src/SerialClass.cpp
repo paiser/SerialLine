@@ -67,6 +67,9 @@ namespace Serial_ns
 //===================================================================
 SerialClass *SerialClass::_instance = NULL;
 
+//===================================================================
+//	Class constants
+//===================================================================
 //--------------------------------------------------------
 /**
  * method : 		SerialClass::SerialClass(std::string &s)
@@ -582,7 +585,7 @@ CORBA::Any *DevSerFlushCompatClass::execute(Tango::DeviceImpl *device, const COR
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::get_class_property()
- *	Description : Get the class property for specified name.
+ * Description:  Get the class property for specified name.
  */
 //--------------------------------------------------------
 Tango::DbDatum SerialClass::get_class_property(std::string &prop_name)
@@ -597,7 +600,7 @@ Tango::DbDatum SerialClass::get_class_property(std::string &prop_name)
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::get_default_device_property()
- *	Description : Return the default value for device property.
+ * Description:  Return the default value for device property.
  */
 //--------------------------------------------------------
 Tango::DbDatum SerialClass::get_default_device_property(std::string &prop_name)
@@ -612,7 +615,7 @@ Tango::DbDatum SerialClass::get_default_device_property(std::string &prop_name)
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::get_default_class_property()
- *	Description : Return the default value for class property.
+ * Description:  Return the default value for class property.
  */
 //--------------------------------------------------------
 Tango::DbDatum SerialClass::get_default_class_property(std::string &prop_name)
@@ -627,7 +630,7 @@ Tango::DbDatum SerialClass::get_default_class_property(std::string &prop_name)
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::get_class_property()
- *	Description : Read database to initialize class property data members.
+ * Description:  Read database to initialize class property data members.
  */
 //--------------------------------------------------------
 void SerialClass::get_class_property()
@@ -639,7 +642,7 @@ void SerialClass::get_class_property()
 	/*----- PROTECTED REGION END -----*/	//	SerialClass::get_class_property_before
 	//	Read class properties from database.
 	cl_prop.push_back(Tango::DbDatum("Simulated"));
-	
+
 	//	Call database and extract values
 	if (Tango::Util::instance()->_UseDb==true)
 		get_db_class()->get_property(cl_prop);
@@ -669,7 +672,7 @@ void SerialClass::get_class_property()
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::set_default_property()
- *	Description : Set default property (class and device) for wizard.
+ * Description:  Set default property (class and device) for wizard.
  *                For each property, add to wizard property name and description.
  *                If default value has been set, add it to wizard property and
  *                store it in a DbDatum.
@@ -816,42 +819,41 @@ void SerialClass::set_default_property()
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::write_class_property()
- *	Description : Set class description fields as property in database
+ * Description:  Set class description fields as property in database
  */
 //--------------------------------------------------------
 void SerialClass::write_class_property()
 {
-	//	First time, check if database used
-	if (Tango::Util::_UseDb == false)
-		return;
+//	First time, check if database used
+if (Tango::Util::_UseDb == false)
+	return;
 
-	Tango::DbData	data;
-	std::string	classname = get_name();
-	std::string	header;
-	std::string::size_type	start, end;
+Tango::DbData	data;
+std::string	classname = get_name();
+std::string	header;
 
-	//	Put title
-	Tango::DbDatum	title("ProjectTitle");
-	std::string	str_title("TANGO Device Server");
-	title << str_title;
-	data.push_back(title);
+//	Put title
+Tango::DbDatum	title("ProjectTitle");
+std::string	str_title("TANGO Device Server");
+title << str_title;
+data.push_back(title);
 
-	//	Put Description
-	Tango::DbDatum	description("Description");
-	std::vector<std::string>	str_desc;
-	str_desc.push_back("C++ source for the SerialClass");
-	description << str_desc;
-	data.push_back(description);
+//	Put Description
+Tango::DbDatum	description("Description");
+std::vector<std::string>	str_desc;
+str_desc.push_back("C++ source for the SerialClass");
+description << str_desc;
+data.push_back(description);
 
-	//  Put inheritance
-	Tango::DbDatum	inher_datum("InheritedFrom");
-	std::vector<std::string> inheritance;
-	inheritance.push_back("TANGO_BASE_CLASS");
-	inher_datum << inheritance;
-	data.push_back(inher_datum);
+//  Put inheritance
+Tango::DbDatum	inher_datum("InheritedFrom");
+std::vector<std::string> inheritance;
+inheritance.push_back("TANGO_BASE_CLASS");
+inher_datum << inheritance;
+data.push_back(inher_datum);
 
-	//	Call database and and values
-	get_db_class()->put_property(data);
+//	Call database and and values
+get_db_class()->put_property(data);
 }
 
 //===================================================================
@@ -861,43 +863,43 @@ void SerialClass::write_class_property()
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::device_factory()
- *	Description : Create the device object(s)
+ * Description:  Create the device object(s)
  *                and store them in the device list
  */
 //--------------------------------------------------------
 void SerialClass::device_factory(const Tango::DevVarStringArray *devlist_ptr)
 {
-	/*----- PROTECTED REGION ID(SerialClass::device_factory_before) ENABLED START -----*/
+/*----- PROTECTED REGION ID(SerialClass::device_factory_before) ENABLED START -----*/
 
 	
 
 	/*----- PROTECTED REGION END -----*/	//	SerialClass::device_factory_before
 
-	//	Create devices and add it into the device list
-	for (unsigned long i=0 ; i<devlist_ptr->length() ; i++)
-	{
-		TANGO_LOG_DEBUG << "Device name : " << (*devlist_ptr)[i].in() << std::endl;
-		device_list.push_back(new Serial(this, (*devlist_ptr)[i]));
-	}
+//	Create devices and add it into the device list
+for (unsigned long i=0 ; i<devlist_ptr->length() ; i++)
+{
+	TANGO_LOG_DEBUG << "Device name : " << (*devlist_ptr)[i].in() << std::endl;
+	device_list.push_back(new Serial(this, (*devlist_ptr)[i]));
+}
 
-	//	Manage dynamic attributes if any
-	erase_dynamic_attributes(devlist_ptr, get_class_attr()->get_attr_list());
+//	Manage dynamic attributes if any
+erase_dynamic_attributes(devlist_ptr, get_class_attr()->get_attr_list());
 
-	//	Export devices to the outside world
-	for (unsigned long i=1 ; i<=devlist_ptr->length() ; i++)
-	{
-		//	Add dynamic attributes if any
-		Serial *dev = static_cast<Serial *>(device_list[device_list.size()-i]);
-		dev->add_dynamic_attributes();
+//	Export devices to the outside world
+for (unsigned long i=1 ; i<=devlist_ptr->length() ; i++)
+{
+	//	Add dynamic attributes if any
+	Serial *dev = static_cast<Serial *>(device_list[device_list.size()-i]);
+	dev->add_dynamic_attributes();
 
-		//	Check before if database used.
-		if ((Tango::Util::_UseDb == true) && (Tango::Util::_FileDb == false))
-			export_device(dev);
-		else
-			export_device(dev, dev->get_name().c_str());
-	}
+	//	Check before if database used.
+	if ((Tango::Util::_UseDb == true) && (Tango::Util::_FileDb == false))
+		export_device(dev);
+	else
+		export_device(dev, dev->get_name().c_str());
+}
 
-	/*----- PROTECTED REGION ID(SerialClass::device_factory_after) ENABLED START -----*/
+/*----- PROTECTED REGION ID(SerialClass::device_factory_after) ENABLED START -----*/
 
 	
 
@@ -906,7 +908,7 @@ void SerialClass::device_factory(const Tango::DevVarStringArray *devlist_ptr)
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::attribute_factory()
- *	Description : Create the attribute object(s)
+ * Description:  Create the attribute object(s)
  *                and store them in the attribute list
  */
 //--------------------------------------------------------
@@ -929,7 +931,7 @@ void SerialClass::attribute_factory(std::vector<Tango::Attr *> &att_list)
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::pipe_factory()
- *	Description : Create the pipe object(s)
+ * Description:  Create the pipe object(s)
  *                and store them in the pipe list
  */
 //--------------------------------------------------------
@@ -949,7 +951,7 @@ void SerialClass::pipe_factory()
 //--------------------------------------------------------
 /**
  *	Method      : SerialClass::command_factory()
- *	Description : Create the command object(s)
+ * Description:  Create the command object(s)
  *                and store them in the command list
  */
 //--------------------------------------------------------
@@ -1172,7 +1174,7 @@ void SerialClass::command_factory()
  * method : 		SerialClass::create_static_attribute_list
  * description : 	Create the a list of static attributes
  *
- * @param	att_list	the ceated attribute list
+ * @param	att_list	the created attribute list
  */
 //--------------------------------------------------------
 void SerialClass::create_static_attribute_list(std::vector<Tango::Attr *> &att_list)
@@ -1234,8 +1236,8 @@ void SerialClass::erase_dynamic_attributes(const Tango::DevVarStringArray *devli
 
 //--------------------------------------------------------
 /**
- *	Method      : SerialClass::get_attr_by_name()
- *	Description : returns Tango::Attr * object found by name
+ *	Method      : SerialClass::get_attr_object_by_name()
+ * Description:  returns Tango::Attr * object found by name
  */
 //--------------------------------------------------------
 Tango::Attr *SerialClass::get_attr_object_by_name(std::vector<Tango::Attr *> &att_list, std::string attname)

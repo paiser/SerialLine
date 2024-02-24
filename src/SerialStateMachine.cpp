@@ -55,7 +55,7 @@ namespace Serial_ns
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerWriteString_allowed()
- *	Description : Execution allowed for DevSerWriteString attribute
+ * Description:  Execution allowed for DevSerWriteString attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerWriteString_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -70,7 +70,7 @@ bool Serial::is_DevSerWriteString_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerWriteChar_allowed()
- *	Description : Execution allowed for DevSerWriteChar attribute
+ * Description:  Execution allowed for DevSerWriteChar attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerWriteChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -85,7 +85,7 @@ bool Serial::is_DevSerWriteChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadString_allowed()
- *	Description : Execution allowed for DevSerReadString attribute
+ * Description:  Execution allowed for DevSerReadString attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadString_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -100,7 +100,7 @@ bool Serial::is_DevSerReadString_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadChar_allowed()
- *	Description : Execution allowed for DevSerReadChar attribute
+ * Description:  Execution allowed for DevSerReadChar attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -115,7 +115,7 @@ bool Serial::is_DevSerReadChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_WriteRead_allowed()
- *	Description : Execution allowed for WriteRead attribute
+ * Description:  Execution allowed for WriteRead attribute
  */
 //--------------------------------------------------------
 bool Serial::is_WriteRead_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -130,7 +130,7 @@ bool Serial::is_WriteRead_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerGetNChar_allowed()
- *	Description : Execution allowed for DevSerGetNChar attribute
+ * Description:  Execution allowed for DevSerGetNChar attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerGetNChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -145,7 +145,7 @@ bool Serial::is_DevSerGetNChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadNChar_allowed()
- *	Description : Execution allowed for DevSerReadNChar attribute
+ * Description:  Execution allowed for DevSerReadNChar attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadNChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -160,7 +160,7 @@ bool Serial::is_DevSerReadNChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadRaw_allowed()
- *	Description : Execution allowed for DevSerReadRaw attribute
+ * Description:  Execution allowed for DevSerReadRaw attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadRaw_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -175,7 +175,7 @@ bool Serial::is_DevSerReadRaw_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadLine_allowed()
- *	Description : Execution allowed for DevSerReadLine attribute
+ * Description:  Execution allowed for DevSerReadLine attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadLine_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -190,7 +190,7 @@ bool Serial::is_DevSerReadLine_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerFlush_allowed()
- *	Description : Execution allowed for DevSerFlush attribute
+ * Description:  Execution allowed for DevSerFlush attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerFlush_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -205,7 +205,7 @@ bool Serial::is_DevSerFlush_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetParameter_allowed()
- *	Description : Execution allowed for DevSerSetParameter attribute
+ * Description:  Execution allowed for DevSerSetParameter attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetParameter_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -220,7 +220,7 @@ bool Serial::is_DevSerSetParameter_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetTimeout_allowed()
- *	Description : Execution allowed for DevSerSetTimeout attribute
+ * Description:  Execution allowed for DevSerSetTimeout attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetTimeout_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -235,7 +235,7 @@ bool Serial::is_DevSerSetTimeout_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetParity_allowed()
- *	Description : Execution allowed for DevSerSetParity attribute
+ * Description:  Execution allowed for DevSerSetParity attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetParity_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -250,7 +250,7 @@ bool Serial::is_DevSerSetParity_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetCharLength_allowed()
- *	Description : Execution allowed for DevSerSetCharLength attribute
+ * Description:  Execution allowed for DevSerSetCharLength attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetCharLength_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -265,7 +265,7 @@ bool Serial::is_DevSerSetCharLength_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetStopbit_allowed()
- *	Description : Execution allowed for DevSerSetStopbit attribute
+ * Description:  Execution allowed for DevSerSetStopbit attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetStopbit_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -280,7 +280,7 @@ bool Serial::is_DevSerSetStopbit_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetBaudrate_allowed()
- *	Description : Execution allowed for DevSerSetBaudrate attribute
+ * Description:  Execution allowed for DevSerSetBaudrate attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetBaudrate_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -295,7 +295,7 @@ bool Serial::is_DevSerSetBaudrate_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetNewline_allowed()
- *	Description : Execution allowed for DevSerSetNewline attribute
+ * Description:  Execution allowed for DevSerSetNewline attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetNewline_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -310,7 +310,7 @@ bool Serial::is_DevSerSetNewline_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadRetry_allowed()
- *	Description : Execution allowed for DevSerReadRetry attribute
+ * Description:  Execution allowed for DevSerReadRetry attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadRetry_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -325,7 +325,7 @@ bool Serial::is_DevSerReadRetry_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerReadNBinData_allowed()
- *	Description : Execution allowed for DevSerReadNBinData attribute
+ * Description:  Execution allowed for DevSerReadNBinData attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerReadNBinData_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -340,7 +340,7 @@ bool Serial::is_DevSerReadNBinData_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerWaitChar_allowed()
- *	Description : Execution allowed for DevSerWaitChar attribute
+ * Description:  Execution allowed for DevSerWaitChar attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerWaitChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -355,7 +355,7 @@ bool Serial::is_DevSerWaitChar_allowed(TANGO_UNUSED(const CORBA::Any &any))
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerSetParameterCompat_allowed()
- *	Description : Execution allowed for DevSerSetParameterCompat attribute
+ * Description:  Execution allowed for DevSerSetParameterCompat attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerSetParameterCompat_allowed(TANGO_UNUSED(const CORBA::Any &any))
@@ -370,7 +370,7 @@ bool Serial::is_DevSerSetParameterCompat_allowed(TANGO_UNUSED(const CORBA::Any &
 //--------------------------------------------------------
 /**
  *	Method      : Serial::is_DevSerFlushCompat_allowed()
- *	Description : Execution allowed for DevSerFlushCompat attribute
+ * Description:  Execution allowed for DevSerFlushCompat attribute
  */
 //--------------------------------------------------------
 bool Serial::is_DevSerFlushCompat_allowed(TANGO_UNUSED(const CORBA::Any &any))

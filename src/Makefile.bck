@@ -129,6 +129,9 @@ LIB_OBJS = \
 
 SVC_INHERITANCE_OBJ =  \
 
+#------------ Object files for additional files ------------
+ADDITIONAL_OBJS = \
+		$(OBJDIR)/SerialLinux.o
 
 #=============================================================================
 #	include common targets
@@ -137,4 +140,6 @@ include $(MAKE_ENV)/common_target.opt
 
 
 
+$(OBJDIR)/SerialLinux.o:  SerialLinux.cpp $(SVC_INCL)
+	$(CXX) $(CXXFLAGS) -c $< -o $(OBJDIR)/SerialLinux.o
 
